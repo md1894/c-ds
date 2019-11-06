@@ -1,0 +1,13 @@
+1.implement linear search and also there is one improvement in program
+2.binary search implementation
+3.check if array is sorted
+4.merging of two array
+5.set operations on array
+6.find single missing element in an array
+7.find single missing element in an array method 2
+8.multiple missing element in an array
+9.find duplicates in sorted array
+10.find duplicates in sorted array using hashing
+11.finding pair of element with sum as k
+12.finding pair of element with sum as k in sorted array
+13.find min and max in a single scan
