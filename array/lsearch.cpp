@@ -13,6 +13,12 @@ int rlsearch(int* iparr,int left,int right,int key){
     return rlsearch(iparr,left+1,right-1,key);
 }
 
+void swap(int* a,int* b){
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
 int ilsearch(int* iparr,int size,int key){
     for(int i = 0 ; i < size ; i++){
         if(key == iparr[i]){
