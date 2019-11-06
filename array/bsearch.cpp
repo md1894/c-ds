@@ -11,6 +11,7 @@ int rbsearch(int* iparr,int left,int right,int key){
             return rbsearch(iparr,mid+1,right,key);
         }
     }
+    return -1;
 }
 
 int ibsearch(int* iparr,int left,int right,int key){
@@ -24,6 +25,7 @@ int ibsearch(int* iparr,int left,int right,int key){
             left = mid+1;
         }
     }
+    return -1;
 
 }
 
