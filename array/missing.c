@@ -45,7 +45,7 @@ void init(int* arr,int size){
 /*
  * this method will work for both sorted and unsorted array
  * it uses hashtable , H is known as hash table
- * this is a generic method it can find single and multiple missing elements from both sorted and unsorted arrays
+ * this is a generic method it can find single and multiple missing elements from sorted array
  */
 void multipleMissing_Hashing(int* iparr,int size,int MAX){
     int low = iparr[0];
