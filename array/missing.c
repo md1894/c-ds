@@ -76,7 +76,7 @@ int main(){
     multipleMissing_Hashing(arr2,6,19);
     printf("\nfinding multiple missing number :: 1,2,3,5,6 :: through  multipleMissing_Hashing(arr,5,6) \n");
     multipleMissing_Hashing(arr,5,6);
-    printf("\nfinding multiple missing number :: 6,1,5,3,2 :: through  multipleMissing_Hashing(arr1,5,6) \n");
-    multipleMissing_Hashing(arr1,5,6);
+    //printf("\nfinding multiple missing number :: 6,1,5,3,2 :: through  multipleMissing_Hashing(arr1,5,6) \n");
+    //multipleMissing_Hashing(arr1,5,6);
     return 0;
 }
