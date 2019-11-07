@@ -41,15 +41,21 @@ void init(int* arr,int size){
     }
 }
 
+
+/*
+ * this method will work for both sorted and unsorted array
+ * it uses hashtable , H is known as hash table
+ * this is a generic method it can find single and multiple missing elements from both sorted and unsorted arrays
+ */
 void multipleMissing_Hashing(int* iparr,int size,int MAX){
-    
+    int low = iparr[0];
     int i;
     int H[MAX];
     init(H,MAX);
     for(i = 0;i < size;i++){
         H[iparr[i]]++;
     }
-    for(i = 1;i<MAX;i++){
+    for(i = low;i<MAX;i++){
         if(H[i] == 0){
             printf("\nMISSING ELEMENT IS %d",i);
         }
@@ -58,10 +64,19 @@ void multipleMissing_Hashing(int* iparr,int size,int MAX){
 
 int main(){
     int arr[5]={1,2,3,5,6};
+    int arr1[5]={6,1,5,3,2};
     int arr2[6]={11,12,14,17,18,19};
+    printf("\nfinding missing number :: 1,2,3,5,6 :: through missingFirstN(arr,5) \n");
     missingFirstN(arr,5);
+    printf("\nfinding missing number :: 1,2,3,5,6 :: through missingMethodTwo(arr,5) \n");
     missingMethodTwo(arr,5);
+    printf("\nfinding multiple missing number :: 11,12,14,17,18,19 :: through  multipleMissing(arr2,6) \n");
     multipleMissing(arr2,6);
+    printf("\nfinding multiple missing number :: 11,12,14,17,18,19 :: through  multipleMissing_Hashing(arr2,6) \n");
+    multipleMissing_Hashing(arr2,6,19);
+    printf("\nfinding multiple missing number :: 1,2,3,5,6 :: through  multipleMissing_Hashing(arr,5,6) \n");
     multipleMissing_Hashing(arr,5,6);
+    printf("\nfinding multiple missing number :: 6,1,5,3,2 :: through  multipleMissing_Hashing(arr1,5,6) \n");
+    multipleMissing_Hashing(arr1,5,6);
     return 0;
 }
