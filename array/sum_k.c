@@ -49,9 +49,36 @@ void sum_hashing(int* iparr,int size,int k){
 }
 
 
+
+/*
+ * this function will find pair of element whose sum is k , for a sorted array
+ */
+void sum_sorted(int* iparr,int size,int k){
+    int i = 0;
+    int j = size-1;
+    while(i<j){
+        if(iparr[i]+iparr[j] == k){
+            printf("\n %d + %d = %d",iparr[i],iparr[j],k);
+            i++;
+            j--;
+        }else if(iparr[i]+iparr[j] >k){
+            j--;
+        }else{
+            i++;
+        }
+    }
+}
+
+
 int main(){
     int arr[7]={11,6,9,2,7,4,1};
+    int arr1[7] = {1,2,4,6,7,9,11};
+    printf("\n---------------------------------------------------------\n");
     k_sum(arr,7,10);
+    printf("\n---------------------------------------------------------\n");
     sum_hashing(arr,7,10);
+    printf("\n---------------------------------------------------------\n");
+    sum_sorted(arr1,7,10);
+    printf("\n---------------------------------------------------------\n");
     return 0;
 }
