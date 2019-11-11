@@ -23,7 +23,9 @@ void comb(char* s,int k){
 
 
 int main(){
-    char str[4] = {'a','b','c','\0'};
+    char str[MAX];
+    printf("Enter any string:\n");
+    gets(str);
     comb(str,0);
     return 0;
 }
