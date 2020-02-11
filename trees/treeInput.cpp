@@ -27,6 +27,26 @@ TreeNode<int>* maxDataNode(TreeNode<int>* root) {
     }
 }
 
+
+void postOrder(TreeNode<int>* root) {
+    /* Don't write main().
+     * Don't read input, it is passed as function argument.
+     * Print output in specified format.
+     */
+    if(root == NULL){
+        return;
+    }
+    
+    if(root->children.size() == 0){
+        cout<<root->data<<" ";
+    }else{
+        for(int i = 0; i < root->children.size(); i++){
+             postOrder(root->children[i]);   
+        }
+        cout<<root->data<<" ";
+    }
+}
+
 int sumOfNodes(TreeNode<int>* root) {
     if(root->children.size() != 0){
         int ans = 0;
