@@ -18,6 +18,7 @@
 #include <iostream>
 using namespace std;
 #include <vector>
+#include <utility>
 
 template <typename T>
 class TreeNode {
@@ -62,8 +63,37 @@ TreeNode<int>* takeInputLevelWise() {
     return root;
 }
 
+pair < TreeNode <int>* , TreeNode <int>* > secondLargest1(TreeNode <int>* root){
+	pair < TreeNode <int>*, TreeNode <int>* > ans;
+	ans.first = root;
+	ans.second = NULL;
+	for(int i = 0; i < root->children.size(); i++){
+		pair < TreeNode <int>*, TreeNode <int>* > temp = secondLargest1(root->children[i]);
+		// case1 : ans(max) < temp(max)
+		int x;
+		if(ans.first->data < temp.first->data){
+			TreeNode<int>* x = ans.first;
+			ans.first = temp.first;
+			if(ans.second == NULL){
+				ans.second = x; 
+			}else if(ans.second->data < temp.first->data){
+				ans.second = x;
+			}else{
+				ans.second = x;
+			}
+		}else if(ans.second == NULL){
+			ans.second = temp.first;
+		}else if(ans.second->data < temp.first->data){
+			ans.second = temp.first;
+		}else{
+			ans.second = ans.first;
+		}
+	}
+	return ans;
+} 
+
 TreeNode <int>* secondLargest(TreeNode<int> *root) {
-    
+	    return secondLargest1(root).second;
 }
 
 int main() {
