@@ -84,7 +84,18 @@ void printLevelATNewLine(TreeNode<int> *root) {
     }
 }
 
-void replaceWithDepthValue(TreeNode<int> *root){ 
+void replaceWithDepthValue1(TreeNode<int> *root, int level){
+    if(root == NULL)
+        return;
+    
+    root->data = level;
+    for(int i = 0; i < root->children.size(); i++){
+        replaceWithDepthValue1(root->children[i],level+1);
+    }
+}
+
+void replaceWithDepthValue(TreeNode<int> *root){    
+    replaceWithDepthValue1(root,0);
 }
 
 int main() {
