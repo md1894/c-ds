@@ -71,22 +71,22 @@ pair < TreeNode <int>* , TreeNode <int>* > secondLargest1(TreeNode <int>* root){
 		pair < TreeNode <int>*, TreeNode <int>* > temp = secondLargest1(root->children[i]);
 		// case1 : ans(max) < temp(max)
 		TreeNode<int>* x = ans.first;
-        if(ans.first->data < temp.first->data){
-            ans.first = temp.first;
-            if(temp.second != NULL){
-                if(temp.second->data > x->data){
-                    ans.second = temp.second;
-                }else
-                    ans.second = x;
-            }else
-                ans.second = x;
-        }else{
-            if(ans.second != NULL){
-                 if(ans.second->data < temp.first->data){
-                    ans.second = temp.first;
-                }   
-            }
-        }
+		if(ans.first->data < temp.first->data){
+		    ans.first = temp.first;
+		    if(temp.second != NULL){
+			if(temp.second->data > x->data){
+			    ans.second = temp.second;
+			}else
+			    ans.second = x;
+		    }else
+			ans.second = x;
+		}else{
+		    if(ans.second != NULL){
+			 if(ans.second->data < temp.first->data){
+			    ans.second = temp.first;
+			}   
+		    }
+		}
 	}
 	return ans;
 } 
