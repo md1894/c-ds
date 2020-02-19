@@ -3,6 +3,25 @@
 #include "BinaryTreeNode.h"
 using namespace std;
 
+
+bool isNodePresent(BinaryTreeNode<int>* root, int x) {
+    bool isPresent;
+    if(root == NULL)
+        return false;
+    
+    if(root->data == x){
+        return true;
+    }else{
+        isPresent = isNodePresent(root->left,x);
+        if(isPresent)
+            return isPresent;
+        else{
+            return isNodePresent(root->right,x);
+        }
+    }
+}
+
+
 void print(BinaryTreeNode<int>* root){
 	if(root == NULL)
 		return;
