@@ -19,6 +19,35 @@ void print(BinaryTreeNode<int>* root){
 	print(root->right);
 }
 
+// print -1 when node is not present
+
+void printLevelWise(BinaryTreeNode<int> *root) {
+    queue<BinaryTreeNode<int>*> pendingNodes;
+    if(root == NULL)
+        return;
+    
+    pendingNodes.push(root);
+    
+    while(pendingNodes.size() != 0){
+        BinaryTreeNode<int>* nd = pendingNodes.front();
+        cout<<nd->data<<":";
+        if(nd->left){
+            cout<<"L:"<<nd->left->data<<",";
+            pendingNodes.push(nd->left);
+        }else{
+            cout<<"L:"<<-1<<",";
+        }
+        if(nd->right){
+            cout<<"R:"<<nd->right->data;
+            pendingNodes.push(nd->right);
+        }else{
+            cout<<"R:"<<-1;
+        }
+        cout<<endl;
+        pendingNodes.pop();
+    }
+}
+
 BinaryTreeNode<int>* takeInputLevelWise(){
 	int rootData;
 	BinaryTreeNode<int>* root = NULL;
