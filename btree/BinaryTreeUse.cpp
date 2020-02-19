@@ -21,6 +21,58 @@ bool isNodePresent(BinaryTreeNode<int>* root, int x) {
     }
 }
 
+void preOrder(BinaryTreeNode<int> *root) {
+    if(root == NULL){
+        cout<<-1<<" ";
+    }else{
+        cout<<root->data<<" ";
+        if(root->left){
+            preOrder(root->left);
+        }
+        if(root->right){
+            preOrder(root->right);
+        }
+    }
+}
+
+void postOrder(BinaryTreeNode<int> *root) {
+    if(root == NULL){
+        cout<<-1<<" ";
+        return;
+    }
+    if(root->left){
+        postOrder(root->left);
+    }
+    if(root->right){
+        postOrder(root->right);
+    }
+    cout<<root->data<<" ";
+}
+
+void mirrorBinaryTree(BinaryTreeNode<int>* root) {
+    // Write your code here
+    if(root == NULL){
+        return;
+    }else{
+        BinaryTreeNode<int>* temp;
+        temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        mirrorBinaryTree(root->left);
+        mirrorBinaryTree(root->right);
+    }
+}
+
+int height(BinaryTreeNode<int> *root) {
+    if(root == NULL){
+        return 1;
+    }
+    if(root->right || root->left){
+        int a1 = 1 + height(root->left);
+        int a2 = 1 + height(root->right);
+        return a1>a2?a1:a2;
+    }
+}
 
 void print(BinaryTreeNode<int>* root){
 	if(root == NULL)
