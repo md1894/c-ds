@@ -35,6 +35,70 @@ void preOrder(BinaryTreeNode<int> *root) {
     }
 }
 
+/*
+  This function will generate The BinaryTree from inorder traversal dataset and preorder traversal dataset
+*/
+BinaryTreeNode<int>* helperGenerateBTree(int* in, int* pre, int inS, int inE, int preS, int preE){
+	// Base Case
+	if(inS > inE){
+		return NULL;
+	}
+	int rootData = pre[preS];
+	int rootIndex = -1;
+	for(int i = inS; i <= inE; i++)
+	{
+		if(rootData == in[i])
+		{
+			rootIndex = i;
+			break;
+		}
+	}
+	int lInS = inS;
+	int lInE = rootIndex - 1;
+	int lPreS = preS + 1;
+	int lPreE = lInE - lInS + lPreS;
+	int rInS = rootIndex + 1;
+	int rInE = inE;
+	int rPreS = lPreE + 1;
+	int rPreE = preE;
+	BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
+	root->left = helperGenerateBTree(in, pre, lInS, lInE, lPreS, lPreE);
+	root->right =  helperGenerateBTree(in, pre, rInS, rInE, rPreS, rPreE);
+	return root;
+}
+
+/*
+  This function will generate The BinaryTree from inorder traversal dataset and postorder traversal dataset
+*/
+BinaryTreeNode<int>* helperGenerateBTree1(int* in, int* pos, int inS, int inE, int posS, int posE){
+	// Base Case
+	if(inS > inE){
+		return NULL;
+	}
+	int rootData = pos[posE];
+	int rootIndex = -1;
+	for(int i = inS; i <= inE; i++)
+	{
+		if(rootData == in[i])
+		{
+			rootIndex = i;
+			break;
+		}
+	}
+	int lInS = inS;
+	int lInE = rootIndex - 1;
+	int lposS = posS;
+	int lPosE = lInE - lInS + lposS;
+	int rInS = rootIndex + 1;
+	int rInE = inE;
+	int rPosS = lPosE + 1;
+	int rPosE = posE - 1;
+	BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
+	root->left = helperGenerateBTree1(in, pos, lInS, lInE, lposS, lPosE);
+	root->right =  helperGenerateBTree1(in, pos, rInS, rInE, rPosS, rPosE);
+	return root;
+}
+
 void postOrder(BinaryTreeNode<int> *root) {
     if(root == NULL){
         cout<<-1<<" ";
@@ -174,8 +238,12 @@ int main(){
 	root->left = left;
 	root->right = right;*/
 	/*BinaryTreeNode<int>* root = takeInput();*/
-	BinaryTreeNode<int>* root = takeInputLevelWise();
-	print(root);
-	delete root;
+// 	BinaryTreeNode<int>* root = takeInputLevelWise();
+// 	print(root);
+// 	delete root;
+    int in[] = {4,2,5,1,8,6,9,3,7};
+    int pre[] = {1,2,4,5,3,6,8,9,7};
+    BinaryTreeNode<int>* root = helperGenerateBTree(in,pre,0,8,0,8);
+    printLevelWise(root);
 	return 0;
 }
