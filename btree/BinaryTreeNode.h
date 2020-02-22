@@ -17,3 +17,9 @@ class BinaryTreeNode{
 		delete this->right;
 	}
 };
+
+ class PairAns {
+    public :
+        int min;
+        int max;
+ };

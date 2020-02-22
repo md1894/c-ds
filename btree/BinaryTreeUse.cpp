@@ -1,5 +1,7 @@
 #include<iostream>
 #include<queue>
+#include <climits>
+#include<bits/stdc++.h>
 #include "BinaryTreeNode.h"
 using namespace std;
 
@@ -19,6 +21,21 @@ bool isNodePresent(BinaryTreeNode<int>* root, int x) {
             return isNodePresent(root->right,x);
         }
     }
+}
+
+PairAns minMax(BinaryTreeNode<int> *root) {
+	if(root==NULL){
+		PairAns ans;
+		ans.min = INT_MAX;
+		ans.max = INT_MIN;
+		return ans;
+	}
+	PairAns leftAns = minMax(root->left);
+	PairAns rightAns = minMax(root->right);
+	PairAns myAns;
+	myAns.max = max(leftAns.max,max(rightAns.max,root->data));
+	myAns.min = min(leftAns.min,min(rightAns.min,root->data));
+	return myAns;
 }
 
 void preOrder(BinaryTreeNode<int> *root) {
