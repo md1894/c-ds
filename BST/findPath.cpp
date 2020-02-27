@@ -74,13 +74,32 @@ BinaryTreeNode<int>* takeInput() {
 }
 
 vector<int>* findPath(BinaryTreeNode<int> *root , int data){
-    /* Don't write main().
-     * Don't read input, it is passed as function argument.
-     * Return output and don't print it.
-     * Taking input and printing output is handled automatically.
-     */
-
+    if(root == NULL){
+        return NULL;
+    }else{
+        vector<int>* v = NULL;
+        if(root->data == data){
+            v = new vector<int>();
+            v->push_back(root->data);
+            return v;
+        }else if(root->data > data){
+            vector<int>* i = findPath(root->left,data);
+            if(i){
+                i->push_back(root->data);
+                return i;
+            }else
+                return NULL;
+        }else{
+            vector<int>* i = findPath(root->right,data);
+            if(i){
+                i->push_back(root->data);
+                return i;
+            }else
+                return NULL;
+        }
+    }
 }
+
 
 int main() {
     BinaryTreeNode<int>* root = takeInput();

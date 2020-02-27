@@ -78,13 +78,39 @@ BinaryTreeNode<int>* takeInput() {
 }
 
 
+pair<Node<int>*, Node<int>*> constructBST1(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        pair<Node<int>*, Node<int>*> p;
+        p.first = NULL;
+        p.second = NULL;
+        return p;
+    }else{
+        Node<int>* nw = new Node<int>(root->data);
+        Node<int>* head = NULL;
+        Node<int>* tail = NULL;
+        pair<Node<int>*, Node<int>*> lp = constructBST1(root->left);
+        if(lp.first == NULL && lp.second == NULL){
+            lp.first = nw;
+            lp.second = nw;
+        }else{
+            lp.second->next = nw;
+            lp.second = lp.second->next;
+        }
+        head = lp.first;
+        tail = lp.second;
+        pair<Node<int>*, Node<int>*> rp = constructBST1(root->right);
+        tail->next = rp.first;
+        if(rp.second)
+            tail = rp.second;
+        pair<Node<int>*, Node<int>*> fp;
+        fp.first = head;
+        fp.second = tail;
+        return fp;
+    }
+}
+
 Node<int>* constructBST(BinaryTreeNode<int>* root) {
-    /* Don't write main().
-     * Don't read input, it is passed as function argument.
-     * Return output and don't print it.
-     * Taking input and printing output is handled automatically.
-     */
-    
+    return constructBST1(root).first;
 }
 
 int main() {
