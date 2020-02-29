@@ -77,9 +77,9 @@ int lcaBinaryTree(BinaryTreeNode <int>* root , int val1, int val2){
     bool isVal2 = isPresent(root, val2);
     if(!isVal1 && !isVal2){
         return -1;
-    }else if(isVal1){
+    }else if(isVal1 && !isVal2){
         return val1;
-    }else if(isVal2){
+    }else if(isVal2 && !isVal1){
         return val2;
     }else{
         return lcaBinaryTree1(root, val1, val2); 
