@@ -22,6 +22,7 @@ Sample Output 1:
 
 #include <iostream>
 #include <queue>
+#include <vector>
 using namespace std;
 
 template <typename T>
@@ -46,6 +47,77 @@ class BinaryTreeNode {
     	}
     }
 };
+
+void merge(vector<int>* v, int l, int m, int r) 
+{ 
+    int i, j, k; 
+    int n1 = m - l + 1; 
+    int n2 =  r - m; 
+  
+    /* create temp arrays */
+    int L[n1], R[n2]; 
+  
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++) 
+        L[i] = (*v)[l + i]; 
+    for (j = 0; j < n2; j++) 
+        R[j] = (*v)[m + 1+ j]; 
+  
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray 
+    j = 0; // Initial index of second subarray 
+    k = l; // Initial index of merged subarray 
+    while (i < n1 && j < n2) 
+    { 
+        if (L[i] <= R[j]) 
+        { 
+            (*v)[k] = L[i]; 
+            i++; 
+        } 
+        else
+        { 
+            (*v)[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of L[], if there 
+       are any */
+    while (i < n1) 
+    { 
+        (*v)[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of R[], if there 
+       are any */
+    while (j < n2) 
+    { 
+        (*v)[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+/* l is for left index and r is right index of the 
+   sub-array of arr to be sorted */
+void mergeSort(vector<int>* v, int l, int r) 
+{ 
+    if (l < r) 
+    { 
+        // Same as (l+r)/2, but avoids overflow for 
+        // large l and h 
+        int m = l+(r-l)/2; 
+  
+        // Sort first and second halves 
+        mergeSort(v, l, m); 
+        mergeSort(v, m+1, r); 
+  
+        merge(v, l, m, r); 
+    } 
+} 
 
 
 
@@ -80,9 +152,49 @@ BinaryTreeNode<int>* takeInput() {
     }
     return root;
 }
+/*
+int len(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        return 0;
+    }else{
+        int l = len(root->left);
+        int r = len(root->right);
+        return 1 + l + r;
+    }
+}*/
+
+
+void get_tree_in_vector(vector<int>* ve,BinaryTreeNode<int>* root){
+    if(root == NULL){
+        return;
+    }else{
+        ve->push_back(root->data);
+        get_tree_in_vector(ve, root->left);
+        get_tree_in_vector(ve, root->right);
+    }
+}
+
+void print_pair_sum(vector<int>* v, int start, int end, int sum){
+    if(start >= end)
+        return;
+    
+    int sum1 = (*v)[start] + (*v)[end];
+    if(sum1 == sum){
+        cout<<(*v)[start]<<" "<<(*v)[end]<<" "<<endl;
+        print_pair_sum(v, start + 1, end - 1, sum);
+    }else if(sum1 > sum){
+        print_pair_sum(v, start, end - 1, sum);
+    }else{
+        print_pair_sum(v, start + 1, end, sum);
+    }
+}
 
 void nodesSumToS(BinaryTreeNode<int> *root, int sum) {
-    
+//     int t_len = len(root);
+    vector<int> ve;
+    get_tree_in_vector(&ve,root);
+    mergeSort(&ve, 0, ve.size() - 1);
+    print_pair_sum(&ve, 0, ve.size() - 1, sum);
 }
 
 int main() {
