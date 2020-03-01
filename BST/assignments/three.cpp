@@ -1,3 +1,34 @@
+/*
+LCA of Binary Tree
+Send Feedback
+Given a binary tree and two nodes, find LCA (Lowest Common Ancestor) of the given two nodes in Binary Tree. Read about LCA if you are having doubts about the definition.
+If out of 2 nodes only one node is present, return that node.
+If both are not present, return -1.
+Input format :
+Line 1 :  Elements in level order form (separated by space)
+(If any node does not have left or right child, take -1 in its place)
+Line 2 : Two integers, Node 1 and Node 2 (separated by space)
+Output Format :
+LCA
+Constraints :
+1 <= N <= 1000
+Sample Input 1:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+2 10
+Sample Output 1:
+10
+Sample Input 2:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+2 6
+Sample Output 2:
+5
+Sample Input 3:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+12 78
+Sample Output 3:
+-1
+*/
+
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -57,19 +88,25 @@ BinaryTreeNode<int>* takeInput() {
     return root;
 }
 
-bool isPresent(BinaryTreeNode<int>* root, int x){
-    if(root == NULL){
-        return false;
-    }else if(root->data == x){
-        return true;
-    }else if(root->data < x){
-        return isPresent(root->right, x);
+int lcaBinaryTree(BinaryTreeNode <int>* root , int v1, int v2){
+    if(root == NULL)
+        return -1;
+    
+    if(root->data == v1 || root->data == v2){
+        return root->data;
     }else{
-        return isPresent(root->left, x);
+        int l = lcaBinaryTree(root->left,v1,v2);
+        int r = lcaBinaryTree(root->right,v1,v2);
+        if(l == -1 && r == -1){
+            return -1;
+        }else if(r == -1 && l != -1){
+            return l;
+        }else if(r != -1 && l == -1){
+            return r;
+        }else if(l != -1 && r != -1){
+            return root->data;
+        }
     }
-}
-
-int lcaBinaryTree1(BinaryTreeNode <int>* root , int val1, int val2){
 }
 
 int lcaBinaryTree(BinaryTreeNode <int>* root , int val1, int val2){

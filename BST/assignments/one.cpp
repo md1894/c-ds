@@ -48,8 +48,23 @@ class BinaryTreeNode {
 };
 
 void insertDuplicateNode(BinaryTreeNode<int> *root) {
-    
+    // Write your code here
+    if(root->left == NULL && root->right == NULL){
+        BinaryTreeNode<int>* dup = new BinaryTreeNode<int>(root->data);
+        root->left = dup;
+        return;
+    }else{
+        BinaryTreeNode<int>* dup = new BinaryTreeNode<int>(root->data);
+        if(root->left)
+            insertDuplicateNode(root->left);
+        BinaryTreeNode<int>* temp = root->left;
+        dup->left = root->left;
+        root->left = dup;
+        if(root->right)
+            insertDuplicateNode(root->right);
+    }    
 }
+
 
 
 
