@@ -109,19 +109,21 @@ int lcaBinaryTree(BinaryTreeNode <int>* root , int v1, int v2){
     }
 }
 
-int lcaBinaryTree(BinaryTreeNode <int>* root , int val1, int val2){
-    bool isVal1 = isPresent(root, val1);
-    bool isVal2 = isPresent(root, val2);
-    if(!isVal1 && !isVal2){
-        return -1;
-    }else if(isVal1 && !isVal2){
-        return val1;
-    }else if(isVal2 && !isVal1){
-        return val2;
-    }else{
-        return lcaBinaryTree1(root, val1, val2); 
-    }
-}
+// int lcaBinaryTree(BinaryTreeNode <int>* root , int val1, int val2){
+//     bool isVal1 = isPresent(root, val1);
+//     bool isVal2 = isPresent(root, val2);
+//     if(!isVal1 && !isVal2){
+//         return -1;
+//     }else if(isVal1 && !isVal2){
+//         return val1;
+//     }else if(isVal2 && !isVal1){
+//         return val2;
+//     }else{
+//         return lcaBinaryTree1(root, val1, val2); 
+//     }
+// }
+
+
 
 int main() {
     BinaryTreeNode<int>* root = takeInput();
