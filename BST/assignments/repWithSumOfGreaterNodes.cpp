@@ -113,9 +113,9 @@ int replaceWithLargerNodesSum1(BinaryTreeNode<int> *root, int sum) {
     int rSum = replaceWithLargerNodesSum1(root->right, sum);
     //root
     int dta = root->data;
-    root->data = sum + rSum;
+    root->data = sum + rSum + dta;
     //left
-    int lSum = replaceWithLargerNodesSum1(root->left, sum + rSum);
+    int lSum = replaceWithLargerNodesSum1(root->left, sum + rSum + dta);
     // return sum
     return rSum + lSum + dta;
 }
