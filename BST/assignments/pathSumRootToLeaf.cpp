@@ -22,6 +22,7 @@ Sample Output 1 :
 
 #include <iostream>
 #include <queue>
+#include <string>
 using namespace std;
 
 template <typename T>
@@ -77,8 +78,27 @@ BinaryTreeNode<int>* takeInput() {
     return root;
 }
 
+void rootToLeafPathsSumToK1(BinaryTreeNode<int> *root, int k, string pth){
+    if(root == NULL){
+        return;
+    }else if(root->right == NULL && root->left == NULL){
+        if(root->data == k){
+            string str = to_string(root->data);
+            pth +=  str;
+            cout<<pth<<endl;
+            return;
+        }
+    }else{
+        string str = to_string(root->data);
+        pth += str + " ";
+        rootToLeafPathsSumToK1(root->left, k - root->data, pth);
+        rootToLeafPathsSumToK1(root->right, k - root->data, pth);
+    }
+}
+
 void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k) {
-    // Write your code here
+    string s = "";
+    rootToLeafPathsSumToK1(root, k, s);
 }
 
 
