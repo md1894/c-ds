@@ -104,9 +104,26 @@ void printLevelATNewLine(BinaryTreeNode<int> *root) {
 		}
 	}
 }
+// reverse inorder direction
+int replaceWithLargerNodesSum1(BinaryTreeNode<int> *root, int sum) {
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        return root->data;
+    }
+    //right
+    int rSum = replaceWithLargerNodesSum1(root->right, sum);
+    //root
+    root->data = sum + rSum;
+    //left
+    int lSum = replaceWithLargerNodesSum1(root->left, sum + rSum);
+    // return sum
+    return rSum + lSum;
+}
 
 void replaceWithLargerNodesSum(BinaryTreeNode<int> *root) {
- 
+    replaceWithLargerNodesSum1(root, 0);
 }
 
 int main() {
