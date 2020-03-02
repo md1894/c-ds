@@ -17,6 +17,7 @@ Sample Output 1:
 
 #include <iostream>
 #include <queue>
+#include <climits>
 using namespace std;
 
 
@@ -73,9 +74,41 @@ BinaryTreeNode<int>* takeInput() {
     return root;
 }
 
-int largestBSTSubtree(BinaryTreeNode<int> *root) {
-    // Write your code here
+class bunch{
+    public:
+        int min;
+        int max;
+        bool isBST;
+        int heightOfMaxBST;
+};
 
+bunch largestBSTSubtree1(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        bunch ans;
+        ans.min = INT_MAX;
+        ans.max = INT_MIN;
+        ans.isBST = true;
+        ans.heightOfMaxBST = 0;
+        return ans;
+    }else{
+        bunch leftBunch = largestBSTSubtree1(root->left);
+        bunch rightBunch = largestBSTSubtree1(root->right);
+        bunch ans;
+        ans.min = min(root->data, min(leftBunch.min, rightBunch.min));
+        ans.max = max(root->data, min(leftBunch.max, rightBunch.max));
+        ans.isBST = leftBunch.isBST && rightBunch.isBST && (leftBunch.max < root->data) 
+            && (rightBunch.min > root->data);
+        if(ans.isBST){
+            ans.heightOfMaxBST = max(leftBunch.heightOfMaxBST, rightBunch.heightOfMaxBST) + 1;
+        }else{
+            ans.heightOfMaxBST = max(leftBunch.heightOfMaxBST, rightBunch.heightOfMaxBST);
+        }
+        return ans;
+    }
+}
+
+int largestBSTSubtree(BinaryTreeNode<int> *root) {
+     return largestBSTSubtree1(root).heightOfMaxBST;
 }
 
 int main() {
