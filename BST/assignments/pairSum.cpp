@@ -24,6 +24,7 @@ Sample Output
 
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 
 template <typename T>
@@ -104,10 +105,83 @@ void printLevelATNewLine(BinaryTreeNode<int> *root) {
 	}
 }
 
-void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
-    // Write your code here
-
+int cnt(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        return 0;
+    }else{
+        return cnt(root->left) + cnt(root->right) + 1;
+    }
 }
+
+void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
+    if(root == NULL){
+          return;
+    }
+    stack<BinaryTreeNode<int>*> inOrder;
+    stack<BinaryTreeNode<int>*> RevInOrder;
+    BinaryTreeNode<int>* temp = root;
+    int countOfNodes = cnt(root);
+    int count = 0;
+    while(temp != NULL){
+        RevInOrder.push(temp);
+        temp = temp->right;
+    }
+    temp = root;
+    while(temp != NULL){
+        inOrder.push(temp);
+        temp = temp->left;
+    }
+    while(count < countOfNodes - 1){
+        BinaryTreeNode<int>* top1 = inOrder.top();
+        BinaryTreeNode<int>* top2 = RevInOrder.top();
+        BinaryTreeNode<int>* top = top1;
+        if(top1->data + top2->data == s){
+            cout<<top1->data<<" "<<top2->data<<endl;
+            inOrder.pop();
+            count++;
+            if(top->right != NULL){
+                top = top->right;
+                while(top != NULL){
+                    inOrder.push(top);
+                    top = top->left;
+                }
+            }
+            top = top2;
+            RevInOrder.pop();
+            count++;
+            if(top->left != NULL){
+                top = top->left;
+                while(top != NULL){
+                    inOrder.push(top);
+                    top = top->right;
+                }
+            }
+        }else if(top1->data + top2->data > s){
+            top = top2;
+            RevInOrder.pop();
+            count++;
+            if(top->left != NULL){
+                top = top->left;
+                while(top != NULL){
+                    RevInOrder.push(top);
+                    top = top->right;
+                }
+            }
+        }else{
+            top = top1;
+            inOrder.pop();
+            count++;
+            if(top->right != NULL){
+                top = top->right;
+                while(top != NULL){
+                    inOrder.push(top);
+                    top = top->left;
+                }
+            }
+        }
+    }
+}
+
 
 int main() {
     BinaryTreeNode<int>* root = takeInput();
