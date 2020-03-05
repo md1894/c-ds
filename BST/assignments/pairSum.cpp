@@ -20,6 +20,9 @@ Sample Input :
 Sample Output
 2 10
 5 7
+
+10 8 21 4 9 13 28 1 6 -1 -1 12 -1 23 -1 -1 -1 5 7 -1 -1 -1 24 -1 -1 -1 -1 -1 -1 
+25
 */
 
 #include <iostream>
@@ -113,6 +116,7 @@ int cnt(BinaryTreeNode<int>* root){
     }
 }
 
+
 void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
     if(root == NULL){
           return;
@@ -131,7 +135,7 @@ void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
         inOrder.push(temp);
         temp = temp->left;
     }
-    while(count < countOfNodes - 1){
+    while(count != countOfNodes){
         BinaryTreeNode<int>* top1 = inOrder.top();
         BinaryTreeNode<int>* top2 = RevInOrder.top();
         BinaryTreeNode<int>* top = top1;
@@ -181,6 +185,8 @@ void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
         }
     }
 }
+
+
 
 
 int main() {
