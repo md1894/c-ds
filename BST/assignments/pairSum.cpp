@@ -121,7 +121,6 @@ int cnt(BinaryTreeNode<int>* root){
     }
 }
 
-
 void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
     if(root == NULL){
           return;
@@ -140,7 +139,7 @@ void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
         inOrder.push(temp);
         temp = temp->left;
     }
-    while(count != countOfNodes){
+    while(count < countOfNodes - 1){
         BinaryTreeNode<int>* top1 = inOrder.top();
         BinaryTreeNode<int>* top2 = RevInOrder.top();
         BinaryTreeNode<int>* top = top1;
@@ -161,7 +160,7 @@ void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
             if(top->left != NULL){
                 top = top->left;
                 while(top != NULL){
-                    inOrder.push(top);
+                    RevInOrder.push(top);
                     top = top->right;
                 }
             }
