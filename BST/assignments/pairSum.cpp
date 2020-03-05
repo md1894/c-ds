@@ -121,6 +121,7 @@ int cnt(BinaryTreeNode<int>* root){
     }
 }
 
+
 void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
     if(root == NULL){
           return;
@@ -189,6 +190,8 @@ void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
         }
     }
 }
+
+
 
 
 int main() {
