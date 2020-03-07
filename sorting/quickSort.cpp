@@ -11,11 +11,20 @@ int partition(int a[], int start, int end){
   int pivot = a[end];
   int pIndex = start;
   for(int i = start; i < end; i++){
-    if(a[i] <= pivot){
-      swap(&a[i], &a[pIndex]);
-      pIndex++;
-    }
+      /*
+      * this step ensures that every element which is less than or equal to
+      * PIVOT element must be on the left side of the pivotIndex [pIndex]
+      */
+      if(a[i] <= pivot){
+	swap(&a[i], &a[pIndex]);
+	pIndex++;
+      }
   }
+  /*
+   * at this point pIndex will be one step ahead of all the element smaller than
+   * or equal to PIVOT element
+   * so we have to take our PIVOT element to the pIndex position 
+   */
   swap(&a[pIndex], &a[end]);
   return pIndex;
 }
