@@ -3,10 +3,23 @@ using namespace std;
 
 
 void insertion_sort(int a[], int n){
-    for(int i = 1; i < n; i++){
+    /*
+     * array is divided into two halves
+     * one is 'sorted' and other is 'unsorted'
+     * target element --> one greater than sorted array
+     * pick target --> a[i], scan through all sorted array
+     * accordingly shift sorted elements
+     * make place for the target element 
+     */
+    for(int i = 1; i < n; i++)
+    {
         int target = a[i];
         int j = i - 1;
-        while(j > -1 && a[j] > target){
+        while(j > -1 && a[j] > target)
+	{
+            /*
+	     * j + 1 --> already captured in target variable
+	     */
             a[j+1] = a[j];
             j--;
         }
