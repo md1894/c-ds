@@ -26,8 +26,26 @@ false
 #include<iostream>
 using namespace std;
 
-bool checksequenece(char large[] , char*small) {
+int getIndex(char a[], char ch){
+	int i;
+	for(i = 0; a[i] != ch; i++){
+		if(a[i] == 0)
+			return -1;
+	}
+	return i;
+}
 
+bool checksequenece(char large[] , char*small) {
+	if(*small == 0)
+		return true;
+	else{
+		int i = getIndex(large, *small);
+		if(i == -1){
+			return false;
+		}else{
+			return checksequenece(large + i, small + 1);
+		}
+	}
 }
 
 int main()
