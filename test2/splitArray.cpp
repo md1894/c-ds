@@ -28,11 +28,70 @@ Sample Output 2 :
 true
 */
 #include <iostream>
+#include <vector>
 using namespace std;
 
+class group{
+public:
+    vector<int> p1;
+    int p1_sum;
+    vector<int> p2;
+    int p2_sum;
+    
+    group(){
+        this->p1_sum = 0;
+        this->p2_sum = 0;
+    }
+};
+
+void push_el(group* g, int el, char type){
+    switch(type){
+        case '1':
+            g->p1.push_back(el);
+            g->p1_sum += el;
+            break;
+        case '2':
+            g->p2.push_back(el);
+            g->p2_sum += el;
+            break;
+    }
+}
+
+group splitArray1(int *input, int size){
+    bool isP1 = false, isP2 = false;
+    group g;
+    if(*input % 3 == 0 && *input % 5 != 0){
+        isP2 = true;
+        push_el(&g,*input,'2');
+    }else if(*input % 5 == 0){
+        isP1 = true;
+        push_el(&g,*input,'1');
+    }
+    if(size == 1){
+        if(!isP1 && !isP2){
+            push_el(&g,*input,'1');
+        }
+        return g;
+    }else{
+        g = splitArray1(input + 1, size - 1);
+        if(isP1){
+            push_el(&g,*input,'1');
+        }else if(isP2){
+            push_el(&g,*input,'2');
+        }else if(!isP1 && !isP2){
+            if(g.p1_sum >= g.p2_sum){
+                push_el(&g,*input,'2');
+            }else{
+                push_el(&g,*input,'1');
+            }
+        }
+        return g;
+    }
+}
+
 bool splitArray(int *input, int size) {
-    if(size == 0)
-        return true;
+    group g = splitArray1(input, size);
+    return (g.p1_sum == g.p2_sum);
 }
 
 int main() {
