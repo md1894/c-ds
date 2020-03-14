@@ -33,6 +33,12 @@ class triplet{
     int arrayIndex;
     int elementIndex;
 
+    triplet(){
+      this->element = 0;
+      this->arrayIndex = 0;
+      this->elementIndex = 0;
+    }
+
     triplet(int element, int arrayIndex, int elementIndex){
         this->element = element;
         this->arrayIndex = arrayIndex;
@@ -52,9 +58,28 @@ vector<int> mergeKSortedArrays(vector<vector<int>*> input){
     vector<int> v;
     int el,array_index,element_index;
     for(int i = 0; i < input.size(); i++){
-        triplet t(input[i][0], i, 0);
+        triplet t(input[i]->front(), i, 0);
         pq.push(t);
     }
+
+    triplet newtriplet;
+    while(!pq.empty()){
+        triplet target = pq.top();
+        pq.pop();
+
+        if(target.elementIndex + 1 < input[target.arrayIndex]->size())
+        {
+          newtriplet.element = (*input[target.arrayIndex])[target.elementIndex + 1];
+          newtriplet.arrayIndex = target.arrayIndex;
+          newtriplet.elementIndex = target.elementIndex + 1;
+          pq.push(newtriplet);
+        }
+        v.push_back(target.element);
+        if(pq.empty()){
+          break;
+        }
+    }
+    return v;
 }
 
 
