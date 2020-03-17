@@ -71,7 +71,7 @@ class ourMap{
             delete oldBuckets[i];
         }
         delete [] oldBuckets;
-        cout<<"---"<<endl;
+        cout<<"rehashing() called , coz load factor exceeded 0.7"<<endl;
     }
 
     public:
