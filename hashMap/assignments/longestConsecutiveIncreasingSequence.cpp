@@ -39,15 +39,42 @@ Sample Output 3 :
 #include <unordered_map>
 using namespace std;
 
+
 vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
+    //Your Code goes here
     unordered_map<int, bool> total_map;
     vector<int> v;
-    int maxLength = 0, start, length = 0, max_start;
+    int length = 0, current, current_start, max_length = 0, start;
     for(int i = 0; i < n; i++){
         total_map[arr[i]] = true;
     }
     for(int i = 0; i < n; i++){
-        
+	        if(total_map[arr[i]]){
+		        total_map[arr[i]] = false;
+		        current = total_map[arr[i]] + 1;
+		        current_start = total_map[arr[i]];
+		        length = 1;
+		    while(total_map.count(current) == 1){
+			    length++;
+                	    total_map[current] = false;
+			    current++;
+		    }
+		    current = current_start - 1;
+		    while(total_map.count(current) == 1){
+			    length++;
+                	    total_map[current] = false;
+			    current--;
+		    }
+		    current_start = current - 1;
+		    if(length > max_length){
+			    max_length = length;
+			    start = current_start;
+		    }
+	    	}
+    }
+    for(int i = 0; i < length; i++){
+	    cout<<start + i<<"*"<<endl;
+	    v.push_back(start + i);
     }
     
     return v;
