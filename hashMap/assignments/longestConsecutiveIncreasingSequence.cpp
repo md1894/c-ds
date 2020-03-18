@@ -37,47 +37,68 @@ Sample Output 3 :
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <climits>
+#include <utility>
 using namespace std;
 
+typedef pair<int,bool> info;
 
 vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
     //Your Code goes here
-    unordered_map<int, bool> total_map;
-    vector<int> v;
-    int length = 0, current, current_start, max_length = 0, start;
+    unordered_map<int, info> map_;
+    vector<int> vector_;
+    int lengthOfMaxSubSequence = -1, mainStart, currentLength, currentElement, currentStart, startIndex = INT_MAX;
+    int currentStartIndex;
     for(int i = 0; i < n; i++){
-        total_map[arr[i]] = true;
+      map_[arr[i]].second = true;
+      map_[arr[i]].first = i;
     }
     for(int i = 0; i < n; i++){
-	        if(total_map[arr[i]]){
-		        total_map[arr[i]] = false;
-		        current = total_map[arr[i]] + 1;
-		        current_start = total_map[arr[i]];
-		        length = 1;
-		    while(total_map.count(current) == 1){
-			    length++;
-                	    total_map[current] = false;
-			    current++;
-		    }
-		    current = current_start - 1;
-		    while(total_map.count(current) == 1){
-			    length++;
-                	    total_map[current] = false;
-			    current--;
-		    }
-		    current_start = current - 1;
-		    if(length > max_length){
-			    max_length = length;
-			    start = current_start;
-		    }
-	    	}
+        if(map_[arr[i]].second){
+            map_[arr[i]].second = false;
+            currentLength = 1;
+            currentStart = arr[i];
+            currentElement = currentStart + 1;
+            while(map_.count(currentElement) == 1){
+                if(map_[currentElement].second == false){
+                    break;
+                }
+                currentLength++;
+                map_[currentElement].second = false;
+                currentElement++;
+            }
+            currentElement = currentStart - 1;
+            while(map_.count(currentElement) == 1){
+                 if(map_[currentElement].second == false){
+                    break;
+                }
+                currentLength++;
+                map_[currentElement].second = false;
+                currentStart = currentElement;
+                currentElement--;
+            }
+            currentStartIndex = map_[currentStart].first;
+            if(currentLength >= lengthOfMaxSubSequence ){
+                  bool isValid = false;
+                  if(currentLength == lengthOfMaxSubSequence){
+                      if(startIndex > currentStartIndex){
+                          isValid = true;
+                      }
+                  }else{
+                      isValid = true;
+                  }
+                  if(isValid){
+                    lengthOfMaxSubSequence = currentLength;
+                    mainStart = currentStart;
+                    startIndex = currentStartIndex;
+                  }
+            }
+        }
     }
-    for(int i = 0; i < length; i++){
-	    cout<<start + i<<"*"<<endl;
-	    v.push_back(start + i);
+    for(int i = 0; i < lengthOfMaxSubSequence; i++){
+      vector_.push_back(mainStart + i);
     }
-    
-    return v;
+    return vector_;
 }
 
 int main(){
