@@ -83,14 +83,14 @@ void type2(int* input, int k, int n){
 		int p = input[i] + k;
 		if(map_.count(p) == 1){
 			int f1 = map_[input[i]];
-			int f2 = map_[input[i]];
+			int f2 = map_[p];
 			int f = f1*f2;
 			pVal(f,p,input[i]);
 		}
 		p = input[i] - k;
 		if(map_.count(p) == 1){
 			int f1 = map_[input[i]];
-			int f2 = map_[input[i]];
+			int f2 = map_[p];
 			int f = f1*f2;
 			pVal(f,p,input[i]);
 		}
