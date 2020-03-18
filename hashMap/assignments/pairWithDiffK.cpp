@@ -68,7 +68,7 @@ void type1(int* input, int k, int n){
 		if(map_.count(input[i]) == 1){
 			int freq = map_[input[i]];
 			if(freq > 1){
-				int n = freq - 1;
+				int n = fact(freq - 1);
 				pVal(n, input[i], input[i]);
 			}
 			map_.erase(input[i]);
@@ -83,14 +83,14 @@ void type2(int* input, int k, int n){
 		int p = input[i] + k;
 		if(map_.count(p) == 1){
 			int f1 = map_[input[i]];
-			int f2 = map_[input[i]];
+			int f2 = map_[p];
 			int f = f1*f2;
 			pVal(f,p,input[i]);
 		}
 		p = input[i] - k;
 		if(map_.count(p) == 1){
 			int f1 = map_[input[i]];
-			int f2 = map_[input[i]];
+			int f2 = map_[p];
 			int f = f1*f2;
 			pVal(f,p,input[i]);
 		}
@@ -101,9 +101,9 @@ void type2(int* input, int k, int n){
 void printPairs(int *input, int n, int k) {
 	// Write your code here
 	if(k == 0)
-		type1(input,n,k);
+		type1(input, k, n);
 	else
-		type2(input,k,n);
+		type2(input, k, n);
 	
 }
 
