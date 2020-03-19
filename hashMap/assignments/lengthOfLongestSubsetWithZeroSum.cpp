@@ -24,7 +24,7 @@ using namespace std;
 
 int lengthOfLongestSubsetWithZeroSum(int* arr, int size){
   unordered_map<int,int> map_;
-  int length = 0, lMax = -1, sum = 0;
+  int length = 0, lMax = 0, sum = 0;
   bool add;
   for(int i = 0; i < size; i++){
     sum += arr[i];
@@ -50,20 +50,6 @@ int lengthOfLongestSubsetWithZeroSum(int* arr, int size){
   }
   return lMax;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 int main(){
