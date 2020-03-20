@@ -4,14 +4,14 @@ using namespace std;
 
 int main(){
   Trie t;
-  t.insertWord("mehul");
-  t.insertWord("meher");
-  bool b = t.searchWord("mehul");
+  t.insertWord("are");
+  t.insertWord("and");
+  bool b = t.searchWord("are");
   if(b){
-      cout<<"Mehul Found"<<endl;
+      cout<<"are Found"<<endl;
   }
-  if(t.searchWord("jayashree")){
-      cout<<"Jaya Found"<<endl;
+  if(t.searchWord("and")){
+      cout<<"art Found"<<endl;
   }
   return 0;
 }
