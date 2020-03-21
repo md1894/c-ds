@@ -2,16 +2,18 @@
 #include <iostream>
 using namespace std;
 
-int main(){
-  Trie t;
-  t.insertWord("are");
-  t.insertWord("and");
-  bool b = t.searchWord("are");
-  if(b){
-      cout<<"are Found"<<endl;
-  }
-  if(t.searchWord("and")){
-      cout<<"art Found"<<endl;
-  }
+
+
+int main() {
+	Trie t;
+	t.insertWord("and");
+	t.insertWord("are");
+	t.insertWord("dot");
+
+	cout << t.searchWord("and") << endl;
+
+	t.removeWord("and");
+	cout << t.searchWord("and") << endl;
+  cout << t.searchWord("pot") << endl;
   return 0;
 }
