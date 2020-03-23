@@ -33,6 +33,11 @@ Sample Input 3 :
 Sample Output 3 :
 15 
 16
+
+repeated value test case
+
+7
+5 1 2 3 6 7 5
 */
 #include <iostream>
 #include <vector>
@@ -44,14 +49,18 @@ using namespace std;
 typedef pair<int,bool> info;
 
 vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
-    //Your Code goes here
+	 //Your Code goes here
     unordered_map<int, info> map_;
     vector<int> vector_;
     int lengthOfMaxSubSequence = -1, mainStart, currentLength, currentElement, currentStart, startIndex = INT_MAX;
     int currentStartIndex;
     for(int i = 0; i < n; i++){
-      map_[arr[i]].second = true;
-      map_[arr[i]].first = i;
+      if(map_.count(arr[i])==0){
+          map_[arr[i]].second = true;
+          map_[arr[i]].first = i;
+        }
+      // map_[arr[i]].second = true; // what if the elements in input are repeated
+      // map_[arr[i]].first = i;
     }
     for(int i = 0; i < n; i++){
         if(map_[arr[i]].second){
@@ -69,7 +78,7 @@ vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
             }
             currentElement = currentStart - 1;
             while(map_.count(currentElement) == 1){
-                 if(map_[currentElement].second == false){
+                if(map_[currentElement].second == false){
                     break;
                 }
                 currentLength++;
@@ -79,19 +88,19 @@ vector<int> longestConsecutiveIncreasingSequence(int *arr, int n){
             }
             currentStartIndex = map_[currentStart].first;
             if(currentLength >= lengthOfMaxSubSequence ){
-                  bool isValid = false;
-                  if(currentLength == lengthOfMaxSubSequence){
-                      if(startIndex > currentStartIndex){
-                          isValid = true;
-                      }
-                  }else{
-                      isValid = true;
-                  }
-                  if(isValid){
-                    lengthOfMaxSubSequence = currentLength;
-                    mainStart = currentStart;
-                    startIndex = currentStartIndex;
-                  }
+                bool isValid = false;
+                if(currentLength == lengthOfMaxSubSequence){
+                    if(startIndex > currentStartIndex){
+                        isValid = true;
+                    }
+                }else{
+                    isValid = true;
+                }
+                if(isValid){
+                  lengthOfMaxSubSequence = currentLength;
+                  mainStart = currentStart;
+                  startIndex = currentStartIndex;
+                }
             }
         }
     }
