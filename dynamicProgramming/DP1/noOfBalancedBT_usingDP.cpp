@@ -25,7 +25,19 @@ Sample Output 2:
 using namespace std;
 
 int binaryTreesOfHeightH(int h) {
-    // Write your code here
+    int mod = (int)(pow(10,9)) + 7;
+    int h1, h2, h1_, h2_;
+    int* ans = new int[h + 1];
+    ans[0] = 1;
+    ans[1] = 1;
+    for(int i = 2; i <= h; i++){
+        h1 = ans[i - 1];
+        h2 = ans[i - 2];
+        h1_ = (int)(((long)(h1)*h1) % mod);
+        h2_ = (int)((2*(long)(h1)*h2) % mod);
+        ans[i] = (h1_ + (h2_)) % mod;
+    }
+    return ans[h];
 }
 
 int main() {
