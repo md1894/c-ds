@@ -29,9 +29,9 @@ Sample Output 2 :
 
 #include<iostream>
 using namespace std;
-
 #include <climits>
 
+// MEMOIZATION APPROACH
 int minCount_(int n, int* ans){
      if(n <= 2)
         return n;
@@ -44,10 +44,12 @@ int minCount_(int n, int* ans){
     int j = 1;
     for(int i = n - j; i >= 0; i = n - (j*j)){
         j++;
+
         if(ans[i] == INT_MAX)
             curr = 1 + minCount_(i, ans);
         else
             curr = ans[i];
+
         if(curr < min){
             min = curr;
         }
