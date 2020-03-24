@@ -36,6 +36,9 @@ int minCount_(int n, int* ans){
      if(n <= 2)
         return n;
     
+    if(ans[n] != INT_MAX)
+        return ans[n];
+
     int curr = INT_MAX;
     int min = INT_MAX;
     int j = 1;
