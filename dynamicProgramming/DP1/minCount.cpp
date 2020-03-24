@@ -32,8 +32,8 @@ using namespace std;
 
 #include <climits>
 
-int minCount(int n){
-    if(n <= 2)
+int minCount_(int n, int* ans){
+     if(n <= 2)
         return n;
     
     int curr = INT_MAX;
@@ -41,12 +41,26 @@ int minCount(int n){
     int j = 1;
     for(int i = n - j; i >= 0; i = n - (j*j)){
         j++;
-        curr = minCount(i);
+        if(ans[i] == INT_MAX)
+            curr = 1 + minCount_(i, ans);
+        else
+            curr = ans[i];
         if(curr < min){
             min = curr;
         }
     }
+    ans[n] = 1 + min;
     return 1 + min;
+}
+
+int minCount(int n){
+   int* ans = new int[n + 1];
+   for(int i = 0; i < n + 1; i++){
+       ans[i] = INT_MAX;
+   }
+   ans[0] = 0;
+   ans[1] = 1;
+   return minCount_(n, ans);
 }
 
 int main(){
@@ -56,4 +70,13 @@ int main(){
     cout << minCount(num);
     
 }
+
+
+
+
+
+
+
+
+
 
