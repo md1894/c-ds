@@ -32,30 +32,64 @@ using namespace std;
 #include <climits>
 
 // MEMOIZATION APPROACH
-int minCount_(int n, int* ans){
-     if(n <= 2)
-        return n;
+// int minCount_(int n, int* ans){
+//      if(n <= 2)
+//         return n;
     
-    if(ans[n] != INT_MAX)
-        return ans[n];
+//     if(ans[n] != INT_MAX)
+//         return ans[n];
 
-    int curr = INT_MAX;
-    int min = INT_MAX;
-    int j = 1;
-    for(int i = n - j; i >= 0; i = n - (j*j)){
-        j++;
+//     int curr = INT_MAX;
+//     int min = INT_MAX;
+//     int j = 1;
+//     for(int i = n - j; i >= 0; i = n - (j*j)){
+//         j++;
 
-        if(ans[i] == INT_MAX)
-            curr = 1 + minCount_(i, ans);
-        else
-            curr = ans[i];
+//         if(ans[i] == INT_MAX)
+//             curr = 1 + minCount_(i, ans);
+//         else
+//             curr = ans[i];
 
-        if(curr < min){
-            min = curr;
+//         if(curr < min){
+//             min = curr;
+//         }
+//     }
+//     ans[n] = 1 + min;
+//     return 1 + min;
+// }
+
+// int minCount(int n){
+//    int* ans = new int[n + 1];
+//    for(int i = 0; i < n + 1; i++){
+//        ans[i] = INT_MAX;
+//    }
+//    ans[0] = 0;
+//    ans[1] = 1;
+//    return minCount_(n, ans);
+// }
+
+
+// DYNAMIC PROGRAMMING APPROACH
+int minCount_(int n, int* ans){
+    int target, curr = INT_MAX, min = INT_MAX;
+    for(int i = 2; i <= n; i++){
+        target = i;
+        min = INT_MAX;
+        curr = INT_MAX;
+        int j = 1;
+        while((j*j) <= target){
+            curr = 1 + ans[target - (j*j)];
+            if(target / (j*j) == 1){
+                curr = 1 + ans[target % (j*j)];
+            }
+            if(curr < min){
+                min = curr;
+            }
+            j++;
         }
+        ans[i] = min;
     }
-    ans[n] = 1 + min;
-    return 1 + min;
+    return ans[n];
 }
 
 int minCount(int n){
