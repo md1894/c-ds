@@ -1,3 +1,20 @@
+/*
+Code: Merge Sort
+Send Feedback
+Sort a given linked list using Merge Sort.
+You don't need to print the elements, just sort the elements and return the head of updated LL.
+Input format :
+Linked list elements (separated by space and terminated by -1)
+Output format :
+Updated LL elements (separated by space)
+Constraints :
+1 <= Length of LL <= 1000
+Sample Input 1 :
+1 4 5 2 -1
+Sample Output 1 :
+1 2 4 5
+*/
+
 #include <iostream>
 class node{
 public:
