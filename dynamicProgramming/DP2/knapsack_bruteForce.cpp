@@ -37,7 +37,6 @@ int knapsack(int* weights, int* values, int n, int maxWeight){
     return max(a, b);
 }
 
-
 int main() {
 	int n; 
 	cin >> n;
