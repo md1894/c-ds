@@ -1,6 +1,7 @@
 // Replace with depth
 // Send Feedback
-// In a given Generic Tree, replace each node with its depth value. You need to just update the data of each node, no need to return or print anything.
+// In a given Generic Tree, replace each node with its depth value. 
+// You need to just update the data of each node, no need to return or print anything.
 // Input format :
 // Line 1 : Elements in level order form separated by space (as per done in class). Order is - 
 // Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element 
