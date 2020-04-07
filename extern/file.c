@@ -14,3 +14,7 @@ int fun(){
 	printf("fun is called which is present in file.c\r\n");
 	return 115;
 }
+
+void change(){
+	a = 2000;
+}
