@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 
@@ -69,6 +70,14 @@ class Stack {
         }
     }
     
+    void print(){
+        Node<T>* tmp = this->head;
+        while(tmp != NULL){
+            cout << tmp->data << " : ";
+            tmp = tmp->next;
+        }
+    }
+    
   
     
 };
@@ -118,5 +127,6 @@ int main() {
         }
         cin >> choice;
     }
+    st.print();
     
 }
